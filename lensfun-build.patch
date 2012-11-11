@@ -1,0 +1,39 @@
+diff -aurN lensfun-0.2.5.orig/build/tibs/compiler/gcc.mak lensfun-0.2.5/build/tibs/compiler/gcc.mak
+--- lensfun-0.2.5.orig/build/tibs/compiler/gcc.mak	2010-04-01 18:51:54.000000000 +0200
++++ lensfun-0.2.5/build/tibs/compiler/gcc.mak	2010-04-01 18:54:53.000000000 +0200
+@@ -75,9 +75,9 @@
+ endef
+ 
+ LINK.GCC.AR = $(GCC.AR) $(GCC.ARFLAGS) $@ $^
+-LINK.GCC.EXEC = $(GCC.LD) -o $@ $(GCC.LDFLAGS) $(LDFLAGS) $1 $^ $(GCC.LDFLAGS.LIBS) $(LDFLAGS.LIBS) $2
++LINK.GCC.EXEC = $(GCC.LD) -o $@ $(GCC.LDFLAGS) $(LDFLAGS) $^ $1 $(GCC.LDFLAGS.LIBS) $(LDFLAGS.LIBS) $2
+ define LINK.GCC.SO.VER
+-	$(GCC.LD) -o $@.$(SHARED.$3) $(call GCC.LDFLAGS.SHARED,$(notdir $@).$(basename $(basename $(SHARED.$3))),$(dir $@)) $(GCC.LDFLAGS) $(LDFLAGS) $1 $^ $(GCC.LDFLAGS.LIBS) $(LDFLAGS.LIBS) $2
++	$(GCC.LD) -o $@.$(SHARED.$3) $(call GCC.LDFLAGS.SHARED,$(notdir $@).$(basename $(basename $(SHARED.$3))),$(dir $@)) $(GCC.LDFLAGS) $(LDFLAGS) $^ $1 $(GCC.LDFLAGS.LIBS) $(LDFLAGS.LIBS) $2
+ 	ln -fs $(notdir $@.$(SHARED.$3)) $@.$(basename $(basename $(SHARED.$3)))
+ 	ln -fs $(notdir $@.$(basename $(basename $(SHARED.$3)))) $@
+ endef
+diff -aurN lensfun-0.2.5.orig/tibs.py lensfun-0.2.5/tibs.py
+--- lensfun-0.2.5.orig/tibs.py	2010-04-01 18:51:54.000000000 +0200
++++ lensfun-0.2.5/tibs.py	2010-04-01 18:53:46.000000000 +0200
+@@ -137,7 +137,6 @@
+             add_config_h ("CONF_SYMBOL_VISIBILITY")
+ 
+         check_cflags ("-Wno-non-virtual-dtor", "CXXFLAGS", "-Werror")
+-        check_cflags ("-mtune=" + TARGET [2], "CFLAGS")
+ 
+         add_config_mak ("GCC.CC", self.CC + " -c")
+         add_config_mak ("GCC.CXX", self.CXX + " -c")
+@@ -304,12 +303,10 @@
+ 
+     add_config_h ("PLATFORM_" + TARGET [0].upper ())
+     add_config_h ("ARCH_" + TARGET [1].upper ())
+-    add_config_h ("TUNE_" + TARGET [2].upper ())
+ 
+     add_config_mak ("HOST", HOST [0])
+     add_config_mak ("TARGET", TARGET [0])
+     add_config_mak ("ARCH", TARGET [1])
+-    add_config_mak ("TUNE", TARGET [2])
+ 
+     if BINDIR is None:
+         BINDIR = PREFIX + "/bin"
