@@ -1,11 +1,11 @@
 Summary:	Camera lens database with image correction support
 Name:		lensfun
-Version:	0.2.6
+Version:	0.2.7
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://download.berlios.de/lensfun/%{name}-%{version}.tar.bz2
-# Source0-md5:	740e4749db04da0a597630dd6339b966
+# Source0-md5:	6061cc2d00a42d3e62512878426fc841
 URL:		http://developer.berlios.de/projects/lensfun/
 BuildRequires:	cmake
 BuildRequires:	glib-devel
@@ -64,6 +64,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README
+%attr(755,root,root) %{_bindir}/tfun
+%attr(755,root,root) %{_bindir}/trwxml
 %attr(755,root,root) %ghost %{_libdir}/liblensfun.so.?
 %attr(755,root,root) %{_libdir}/liblensfun.so.*.*.*
 %{_datadir}/lensfun
@@ -72,6 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_includedir}/lensfun
 %{_libdir}/liblensfun.so
+%{_pkgconfigdir}/lensfun.pc
 
 %files apidocs
 %defattr(644,root,root,755)
