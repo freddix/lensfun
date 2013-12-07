@@ -1,11 +1,11 @@
 Summary:	Camera lens database with image correction support
 Name:		lensfun
-Version:	0.2.7
+Version:	0.2.8
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://download.berlios.de/lensfun/%{name}-%{version}.tar.bz2
-# Source0-md5:	6061cc2d00a42d3e62512878426fc841
+# Source0-md5:	db2988505e7432c6b331aa597789c639
 URL:		http://developer.berlios.de/projects/lensfun/
 BuildRequires:	cmake
 BuildRequires:	glib-devel
